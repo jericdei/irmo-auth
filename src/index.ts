@@ -6,11 +6,9 @@ import { User } from './database/schema'
 
 const app = new Hono<Session>()
 
-// Serve static files in `public` directory
 app.use('*', serveStatic({
   root: "./public",
 }))
-
 
 app.use('*', session)
 

@@ -6,7 +6,9 @@ const auth = new Hono()
 auth.get('/login', ({ render }) => render(<Login />))
 
 auth.post('/login', async (c) => {
-  console.log(await c.req.formData())
+  const body = await c.req.parseBody()
+
+  console.log(body)
 
   return c.redirect('/')
 })
