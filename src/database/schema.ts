@@ -5,7 +5,7 @@ export const users = sqliteTable('users', {
   name: text('first_name').notNull(),
   email: text('email').unique().notNull(),
   password: text('password').notNull(),
-  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
+  createdAt: integer('created_at', { mode: 'timestamp' }).notNull().default(new Date()),
 })
 
 export type User = typeof users.$inferInsert

@@ -3,6 +3,8 @@ import { session, type Session } from './session'
 import auth from './routers/auth'
 import { serveStatic } from 'hono/bun'
 import { User } from './database/schema'
+import { authMiddleware } from './middlewares/authMiddleware'
+import Index from './views'
 
 const app = new Hono<Session>()
 
@@ -12,17 +14,7 @@ app.use('*', serveStatic({
 
 app.use('*', session)
 
-app.get('/', (c) => {
-  const session = c.get('session')
-
-  const user = session.get('user') as User
-
-  if (!user) {
-    return c.redirect('/auth/login')
-  }
-
-  return c.html(`You are now logged in as ${user.name}`)
-})
+app.get('/', authMiddleware, (c) => c.render(<Index user={c.get('user')} />))
 
 app.route("/auth", auth)
 

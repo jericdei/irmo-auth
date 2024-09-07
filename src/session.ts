@@ -1,6 +1,7 @@
 import { Session as HonoSession, sessionMiddleware } from "hono-sessions"
 import { BunSqliteStore } from 'hono-sessions/bun-sqlite-store'
 import { sqlite } from "./database"
+import { User } from "./database/schema"
 
 const sessionStore = new BunSqliteStore(sqlite)
 
@@ -18,7 +19,9 @@ const session = sessionMiddleware({
 type Session = {
   Variables: {
     session: HonoSession,
-    session_key_rotation: boolean
+    session_key_rotation: boolean,
+    error: string,
+    user: User
   }
 }
 
