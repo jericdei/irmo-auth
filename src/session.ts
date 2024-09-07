@@ -20,7 +20,6 @@ type Session = {
   Variables: {
     session: HonoSession;
     session_key_rotation: boolean;
-    error: string;
     user: User;
   };
 };
