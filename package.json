@@ -7,7 +7,6 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.2.2",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
     "hono": "^4.5.11",
