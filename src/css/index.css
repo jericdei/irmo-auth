@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply p-8 bg-zinc-900 text-zinc-200 min-h-screen;
+  font-family: Arial, Helvetica, sans-serif;
+}

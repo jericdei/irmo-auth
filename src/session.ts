@@ -1,8 +1,8 @@
 import { Session as HonoSession, sessionMiddleware } from "hono-sessions"
 import { BunSqliteStore } from 'hono-sessions/bun-sqlite-store'
-import { db } from "./db"
+import { sqlite } from "./database"
 
-const sessionStore = new BunSqliteStore(db)
+const sessionStore = new BunSqliteStore(sqlite)
 
 const session = sessionMiddleware({
   store: sessionStore,

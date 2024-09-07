@@ -1,21 +1,32 @@
 import { Hono } from 'hono'
 import { session, type Session } from './session'
+import auth from './routers/auth'
+import { serveStatic } from 'hono/bun'
+import { User } from './database/schema'
 
 const app = new Hono<Session>()
+
+// Serve static files in `public` directory
+app.use('*', serveStatic({
+  root: "./public",
+}))
+
 
 app.use('*', session)
 
 app.get('/', (c) => {
   const session = c.get('session')
 
-  if (session.get('counter')) {
-    session.set('counter', session.get('counter') as number + 1)
-  } else {
-    session.set('counter', 1)
+  const user = session.get('user') as User
+
+  if (!user) {
+    return c.redirect('/auth/login')
   }
 
-  return c.html(`<h1>You have visited this page ${session.get('counter')} times</h1>`)
+  return c.html(`You are now logged in as ${user.name}`)
 })
+
+app.route("/auth", auth)
 
 export default {
   port: 6969,

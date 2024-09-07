@@ -1,13 +1,21 @@
 {
   "name": "irmo-auth",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts & bunx tailwindcss -i ./src/css/index.css -o ./public/css/index.css --watch",
+    "db:generate": "bun drizzle-kit generate",
+    "db:push": "bun drizzle-kit push"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.33.0",
     "hono": "^4.5.11",
-    "hono-sessions": "^0.5.8"
+    "hono-sessions": "^0.5.8",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@tailwindcss/forms": "^0.5.9",
+    "@types/bun": "latest",
+    "drizzle-kit": "^0.24.2",
+    "tailwindcss": "^3.4.10"
   }
 }
