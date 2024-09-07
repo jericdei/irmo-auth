@@ -1,8 +1,8 @@
-import { Database } from 'bun:sqlite'
-import { drizzle } from 'drizzle-orm/bun-sqlite'
+import { Database } from "bun:sqlite";
+import { drizzle } from "drizzle-orm/bun-sqlite";
 
-const sqlite = new Database('./database.sqlite')
+const sqlite = new Database("./database.sqlite");
 
-const db = drizzle(sqlite)
+const db = drizzle(sqlite);
 
-export { sqlite, db }
+export { sqlite, db };

@@ -1,24 +1,26 @@
-import { Hono } from 'hono'
-import { session, type Session } from './session'
-import auth from './routers/auth'
-import { serveStatic } from 'hono/bun'
-import { User } from './database/schema'
-import { authMiddleware } from './middlewares/authMiddleware'
-import Index from './views'
+import { Hono } from "hono";
+import { session, type Session } from "./session";
+import authRouter from "./routers/authRouter";
+import { serveStatic } from "hono/bun";
+import { authMiddleware } from "./middlewares/authMiddleware";
+import Index from "./views";
 
-const app = new Hono<Session>()
+const app = new Hono<Session>();
 
-app.use('*', serveStatic({
-  root: "./public",
-}))
+app.use(
+  "*",
+  serveStatic({
+    root: "./public",
+  }),
+);
 
-app.use('*', session)
+app.use("*", session);
 
-app.get('/', authMiddleware, (c) => c.render(<Index user={c.get('user')} />))
+app.get("/", authMiddleware, (c) => c.render(<Index user={c.get("user")} />));
 
-app.route("/auth", auth)
+app.route("/auth", authRouter);
 
 export default {
   port: 6969,
-  fetch: app.fetch
-}
+  fetch: app.fetch,
+};
