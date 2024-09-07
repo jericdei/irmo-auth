@@ -58,4 +58,4 @@ Then you can now run the dev server
 bun dev
 ```
 
-The server will run on [http://localhost:6969]().
+The server will run on [http://localhost:6969](http://localhost:6969).
